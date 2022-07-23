@@ -2,25 +2,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void transcribe(char *rna, const char *dna)
+void transcribe(char *buffer, const char *dna)
 {
-    strcpy(rna, dna);
+    strcpy(buffer, dna);
     for (int i = 0; i < strlen(dna); i++)
         if (dna[i] == 'T')
-            rna[i] = 'U';
+            buffer[i] = 'U';
 }
 
 int main(int argc, char **argv)
 {
     size_t size = 0; // ignore
-    char *buffer = NULL; // for DNA string
-    getline(&buffer, &size, stdin);
+    char *dna = NULL;
+    getline(&dna, &size, stdin);
 
-    buffer[strcspn(buffer, "\n")] = 0; // replaces newline (if exists) by 0
+    buffer[strcspn(dna, "\n")] = 0; // replaces newline (if exists) by 0
 
-    char rna[strlen(buffer)];
-    transcribe(rna, buffer);
+    char rna[strlen(dna)];
+    transcribe(rna, dna);
     printf("%s\n", rna);
 
-    free(buffer);
+    free(dna);
 }
