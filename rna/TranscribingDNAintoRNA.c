@@ -16,7 +16,7 @@ int main(int argc, char **argv)
     char *dna = NULL;
     getline(&dna, &size, stdin);
 
-    buffer[strcspn(dna, "\n")] = 0; // replaces newline (if exists) by 0
+    dna[strcspn(dna, "\n")] = 0; // replaces newline (if exists) by 0
 
     char rna[strlen(dna)];
     transcribe(rna, dna);
