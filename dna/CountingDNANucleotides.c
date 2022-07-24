@@ -26,7 +26,7 @@ int main(int argc, char **argv)
     char *dna = NULL;
     getline(&dna, &size, stdin);
 
-    dna[strcspn(dna, "\n")] = 0; // replace newline (if exists) by 0
+    dna[strcspn(dna, "\n\r")] = 0; // replace newline (if exists) by 0
 
     int counter[4] = {0, 0, 0, 0};
     count_bases(counter, dna);
