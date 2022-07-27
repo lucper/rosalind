@@ -11,8 +11,8 @@ Return: The Hamming distance dH(s,t).
 
 import fileinput
 
-def hamming(strand1,strand2):
-    return sum(base1 != base2 for base1, base2 in zip(strand1,strand2))
+def hamming(dna1, dna2):
+    return sum(base1 != base2 for base1, base2 in zip(dna1,dna2))
 
 if __name__ == '__main__':
     with fileinput.input() as fin:
