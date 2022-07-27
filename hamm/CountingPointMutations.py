@@ -9,24 +9,13 @@ Given: Two DNA strings s and t of equal length (not exceeding 1 kbp).
 Return: The Hamming distance dH(s,t).
 """
 
-def hamming_distance(strand1,strand2):
-    """
-    nucleobase_index = hamming = 0
-    while nucleobase_index < len(strand1):
-        if strand1[nucleobase_index] != strand2[nucleobase_index]:
-            hamming += 1
-        nucleobase_index += 1
-    return hamming
-    """
-    return sum(nucleobase1 != nucleobase2 for nucleobase1, nucleobase2 in zip(strand1,strand2))
+import fileinput
 
-def read_dataset(file_name):
-    with open(file_name) as file:
-        first_line = file.readline().strip()
-        second_line = file.readline().strip()
-    return (first_line, second_line)
+def hamming(strand1,strand2):
+    return sum(base1 != base2 for base1, base2 in zip(strand1,strand2))
 
 if __name__ == '__main__':
-    strands = read_dataset('rosalind_hamm.txt')
-    result = hamming_distance(strands[0],strands[1])
-    print(result)
+    with fileinput.input() as fin:
+        strands = [line.strip() for line in fin]
+
+    print(hamming(*strands))
