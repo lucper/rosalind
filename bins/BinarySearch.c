@@ -15,10 +15,37 @@ int binsearch(int *arr, int start, int end, int key)
         return mid;
 }
 
+static void str2int(int *buffer, char *items) {
+    char *token = strtok(items, " ");
+    for (int i = 0; token != NULL; i++) {
+        buffer[i] = atoi(token);
+        token = strtok(NULL, " ");
+    }
+}
+
 int main(int argc, char **argv)
 {
-    int arr[5] = {1,2,3,4,5};
-    int key = 2;
-    int indx = binsearch(arr, 0, 4, key);
-    printf("2 is at index %d\n", indx);
+    size_t size= 0; // ignore
+    char *currline = NULL;
+    
+    getline(&currline, &size, stdin);
+    int n = atoi(currline);
+
+    getline(&currline, &size, stdin);
+    int m = atoi(currline);
+
+    getline(&currline, &size, stdin);
+    currline[strcspn(currline, "\n\r")] = 0; // replaces newline (if exists) by 0
+    int arr[n];
+    str2int(arr, currline);
+
+    getline(&currline, &size, stdin);
+    currline[strcspn(currline, "\n\r")] = 0; // replaces newline (if exists) by 0
+    int keys[m];
+    str2int(keys, currline);
+
+    int idx;
+    for (int i = 0; i < m; i++)
+        printf("%d ", (idx = binsearch(arr, 0, n-1, keys[i])) > -1 ? idx+1 : -1); // format output as requested
+    printf("\n");
 }
