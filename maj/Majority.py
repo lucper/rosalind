@@ -37,8 +37,6 @@ def majority(arr):
 
 if __name__ == '__main__':
     with fileinput.input() as fin:
-        k, _ = fin.readline().split()
-        lines = [line.split() for line in fin]
-        for line in lines:
-            maj, occ = majority(line)
-            #print(maj if occ > 0 else occ)
+        next(fin) # skip 1st line
+        results = [majority(line.split()) for line in fin]
+        print(" ".join(str(m) if o > 0 else str(o) for m, o in results))
